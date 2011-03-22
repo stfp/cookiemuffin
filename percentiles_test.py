@@ -5,7 +5,7 @@ import unittest
 class TestBasicPercentiles(unittest.TestCase):
   
   def setUp(self):
-    self.tracker = percentiles.Tracker([25, 50, 70])
+    self.tracker = percentiles.Tracker([25, 50, 75])
 
     
   def test_simple(self):

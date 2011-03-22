@@ -38,6 +38,32 @@ class TestClampedPercentiles(object):
     self.assertEqual([50], self.tracker.get_all())
 
 
+class TestExpiringPercentils(object):
+  
+  def setUp(self):
+    self.tracker = percentiles.Tracker([50], expire = 60 * 60)
+    
+  
+  def test_simple(self):
+    self.tracker.add(100, time = 0)
+    self.assertEqual([100], self.tracker.get_all(time = 500))
+    
+    self.tracker.add(200, time = 1000)
+    self.assertEqual([150], self.tracker.get_all(time = 1500))
+    
+    self.tracker.add(300, time = 2000)
+    self.assertEqual([200], self.tracker.get_all(time = 2500))
+    
+    self.tracker.add(200, time = 3000)
+    self.assertEqual([200], self.tracker.get_all(time = 3500))
+    
+    self.tracker.add(100, time = 4000)
+    self.assertEqual([200], self.tracker.get_all(time = 4500))
+    
+    self.tracker.add(900, time = 5000)
+    self.assertEqual([200], self.tracker.get_all(time = 5500))
+
+
 
 if __name__ == '__main__':
   unittest.main()

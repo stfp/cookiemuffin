@@ -33,6 +33,8 @@ class Tracker:
 
 
 class ContextTracker():
+    """ a contextual time tracker with a 1ms precision
+    """
     def __init__(self, percentile_list):
         self.percentile_list = percentile_list
         self.path = []
@@ -44,7 +46,7 @@ class ContextTracker():
         self.times.append(time.time())
     
     def leave(self):
-        duration = time.time() - self.times.pop()
+        duration = int((time.time() - self.times.pop()) * 1000)
         self.getTrackerForPath(self.currentPath()).add(duration)
         self.path.pop()
 

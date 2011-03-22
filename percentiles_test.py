@@ -2,7 +2,7 @@ import percentiles
 import unittest
 
 
-class TestBasicPercentiles(object):
+class TestBasicPercentiles(unittest.TestCase):
   
   def setUp(self):
     self.tracker = percentiles.Tracker([25, 50, 70])
@@ -22,10 +22,10 @@ class TestBasicPercentiles(object):
     
 
 
-class TestClampedPercentiles(object):
+class TestClampedPercentiles(unittest.TestCase):
   
   def setUp(self):
-    self.tracker = percentiles.Tracker([50], max = 100)
+    self.tracker = percentiles.Tracker([50], maximum=100)
 
 
   def test_simple(self):
@@ -38,7 +38,7 @@ class TestClampedPercentiles(object):
     self.assertEqual([50], self.tracker.get_all())
 
 
-class TestExpiringPercentils(object):
+class TestExpiringPercentiles(unittest.TestCase):
   
   def setUp(self):
     self.tracker = percentiles.Tracker([50], expire = 60 * 60)

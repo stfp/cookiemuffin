@@ -1,6 +1,6 @@
 import percentiles
 import unittest
-
+import time
 
 class TestBasicPercentiles(unittest.TestCase):
   
@@ -63,6 +63,23 @@ class TestExpiringPercentiles(unittest.TestCase):
     self.tracker.add(900, time = 5000)
     self.assertEqual([200], self.tracker.get_all(time = 5500))
 
+
+class TestContextTimeTracker(unittest.TestCase):
+  
+  def setUp(self):
+    self.tracker = percentiles.ContextTracker([50])
+    
+
+  def test_simple(self):
+    self.tracker.enter('a')
+    time.sleep(0.5)
+    self.tracker.enter('b')
+    time.sleep(0.1)
+    self.tracker.leave()
+    time.sleep(0.1)
+    self.tracker.leave()
+    self.assertEqual([700], self.tracker.trackers['a'].get_all())
+    self.assertEqual([100], self.tracker.trackers['a/b'].get_all())
 
 
 if __name__ == '__main__':

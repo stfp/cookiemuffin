@@ -3,13 +3,13 @@
 import time
 
 class Tracker:
-    def __init__(self, percentile_list, maximum=None):
+    def __init__(self, percentile_list, maximum=None, expire=None):
         self.__percentile_list = [ x/100.0 for x in percentile_list ]
         self.__data = []
         self.__total = 0
         self.__maximum = maximum
     
-    def add(self, *args):
+    def add(self, *args, **kwargs):
         for value in args:
             if self.__maximum:
                 value = min(value, self.__maximum)
@@ -19,7 +19,7 @@ class Tracker:
                 self.__data[i] += 1
             self.__total += value
     
-    def get_all(self):
+    def get_all(self, time=None):
         result = []
         for per in self.__percentile_list:
             goal = per * self.__total

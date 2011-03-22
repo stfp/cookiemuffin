@@ -1,0 +1,24 @@
+CookieMuffin
+===============================
+
+Goals:
+- aggregate response times, request counts etc, per request, per 'tag'
+- tags is a semi structured path
+- be ~quick & stable (memory, cpu wise) 
+
+
+
+
+
+Overall picture:
+    client code --calls--> cookiemuffin <--restish-poll-- management service/node
+
+
+
+
+
+Todo:
+
+- get real/proper API from unit tests 
+
+

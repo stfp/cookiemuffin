@@ -12,7 +12,7 @@ class TestBasicPercentiles(object):
     self.tracker.add(1, 3, 4, 8, 10)
     self.assertEqual([3, 4, 8], self.tracker.get_all())
     
-    self.tracker.add(7, 2, 9 5)
+    self.tracker.add(7, 2, 9, 5)
     self.assertEqual([3, 5, 8])
 
     

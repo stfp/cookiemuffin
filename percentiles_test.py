@@ -16,7 +16,7 @@ class TestBasicPercentiles(object):
     self.assertEqual([3, 5, 8])
 
     
-  def test_interpolation(self)::
+  def test_interpolation(self):
     self.tracker.add(0, 100)
     self.assertEqual([25, 50, 75], self.tracker.get_all())
     

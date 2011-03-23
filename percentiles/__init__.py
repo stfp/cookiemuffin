@@ -42,6 +42,7 @@ class Tracker:
             k = self.__count
         elif percentile in pcranks:
             k = pcranks.index(percentile) + 1
+            return self.value_for_rank(k)
         else:
             k = 1
             for i in range(self.__count - 1):
